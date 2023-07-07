@@ -3,6 +3,10 @@ var applicationID = createID(10)
 var currentUserID = ""
 var videoURL = ""
 
+var city = ""
+var state = ""
+
+
 let applicationForm = document.getElementById("application-form")
 let successScreen = document.getElementById("success-screen")
 let errorMessage = document.getElementById("error-message")
@@ -47,7 +51,8 @@ function sendApplicationToDatabase() {
     var timeStamp = (today.getTime() / 1000).toString()
 
     var updateDict = {
-        'City' : document.getElementById('location').value,
+        'City' : city,
+        'State' : state,
         'Bio' : document.getElementById('goodFit').value,
         'Profession' : document.getElementById('profession').value,
         'Age' : document.getElementById('age').value,
