@@ -210,3 +210,153 @@ async function uploadAndCreateVideo() {
             videoLoading.style.display = "none"
         })
 }
+
+
+
+
+
+//Search bar
+
+
+//Disable header form
+$('#city-search-form').submit(function() {
+    return false;
+});
+
+
+//Header Search Container
+const citySearchResults = document.getElementById('city-search-results')
+citySearchResults.style.display = 'none'
+
+const cityStateText = document.getElementById('cityStateText')
+cityStateText.style.display = 'none'
+
+//Algolia  
+const searchClient = algoliasearch('88VNJUJA58', 'fdb7b8494c49048d04a5dfdcaca9c52d');
+
+const headerSearch = instantsearch({
+    indexName: 'baymaze_cities',
+    searchClient,
+    getSearchParams() {
+        return {
+          hitsPerPage: 10,
+        }
+    }
+});
+
+
+
+function createAutocompleteResults(results) {
+
+    let hitsContainer = document.createElement('div')
+    hitsContainer.className = 'city-search-results'
+
+    if(results.hits.length != 0) {
+        for (i = 0; i < (results.hits.length < 5 ? results.hits.length : 5); i++) {
+
+            var hit = results.hits[i]
+    
+            let headerAutocompleteResult = document.createElement('div')
+            headerAutocompleteResult.className = 'header-autocomplete-result'
+
+            headerAutocompleteResult.setAttribute('onClick', `addCityForUser("${hit.cityName}", "${hit.state}")`)
+            hitsContainer.appendChild(headerAutocompleteResult)
+        
+            let headerResultInfoDiv = createDOMElement('div', 'header-result-info-div', 'none', headerAutocompleteResult)
+            createDOMElement('div', 'header-result-title', hit.cityName, headerResultInfoDiv)
+            createDOMElement('div', 'header-result-price',hit.state, headerResultInfoDiv)
+    
+            if (i != 4) {
+                createDOMElement('div', 'header-autocomplete-divider', 'none', hitsContainer)
+            }
+        }
+    } else {
+        citySearchResults.style.display = 'none'
+    }
+
+    return hitsContainer.outerHTML
+}
+
+function addCityForUser(cityString, stateString) {
+
+    city = cityString
+    state = stateString
+
+    console.log(city)
+    console.log(state)
+
+    citySearchResults.style.display = 'none'
+
+    cityStateText.style.display = 'block'
+    cityStateText.innerHTML = `${city}, ${state}`
+}
+
+// Create the render function
+const headerRenderAutocomplete = (renderOptions, isFirstRender) => {
+  const { indices, currentRefinement, refine, widgetParams } = renderOptions;
+
+  if (isFirstRender) {
+    const input = document.querySelector('#city-search-field');
+
+    input.addEventListener('input', event => {
+        refine(event.currentTarget.value);
+
+        if(citySearchResults.style.display == 'none') {
+            $('#city-search-results').fadeIn(200).css('display', 'block')
+        }
+
+        if(event.currentTarget.value == '') {
+            $('#city-search-results').fadeOut(200)
+        }
+    });
+  }
+
+  document.querySelector('#city-search-field').value = currentRefinement;
+  widgetParams.container.innerHTML = indices
+    .map(createAutocompleteResults)
+    .join('');
+};
+
+// Create the custom widget
+const headerCustomAutocomplete = instantsearch.connectors.connectAutocomplete(
+    headerRenderAutocomplete
+);
+
+// Instantiate the custom widget
+headerSearch.addWidgets([
+    
+    headerCustomAutocomplete({
+    container: document.querySelector('#city-search-results'),
+  })
+  
+]);
+
+headerSearch.start()
+
+
+//Hide results if clicked outside
+window.addEventListener('click', function(e){   
+    if (document.getElementById('city-search-results').contains(e.target)){
+      // Clicked in box
+    } else{
+      // Clicked outside the box
+      $('#city-search-results').fadeOut()
+    }
+});
+
+
+
+function createDOMElement(type, classStr, text, parentElement) {
+    let DOMElement = document.createElement(`${type}`)
+    DOMElement.className = classStr
+  
+    if(text != 'none') {
+      DOMElement.innerHTML = text
+    }
+  
+    if(parentElement != 'none') {
+      parentElement.appendChild(DOMElement)
+    }
+  
+    return(DOMElement)
+}
