@@ -1,21 +1,4 @@
-//Global Variables__________________________________________________________________
-var applicationID = createID(10)
-var currentUserID = ""
-var videoURL = ""
 
-var city = ""
-var state = ""
-
-
-let applicationForm = document.getElementById("application-form")
-let successScreen = document.getElementById("success-screen")
-let errorMessage = document.getElementById("error-message")
-
-document.getElementById("submitApplication").addEventListener("click", sendApplicationToDatabase)
-
-window.onload = function() {
-    loadUserAccountInitialState()
-};
 
 
 function loadUserAccountInitialState() {
@@ -393,13 +376,5 @@ function selectHobby() {
         }
     } else {
         console.log("This hobby is not in the available hobbies list.");
-    }
-}
-
-window.onload = function() {
-    let hobbiesItems = document.getElementsByClassName("hobbiesitem");
-
-    for (let i = 0; i < hobbiesItems.length; i++) {
-        hobbiesItems[i].addEventListener("click", selectHobby);
     }
 }
