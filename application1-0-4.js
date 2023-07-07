@@ -24,7 +24,7 @@ function loadUserAccountInitialState() {
         if (user) {
             // User is signed in
             currentUserID = user.uid;
-
+            console.log(currentUserID)
             database.collection('users').doc(currentUserID).get().then( (doc) => {
                 var data = doc.data()
 
