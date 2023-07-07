@@ -59,7 +59,7 @@ function sendApplicationToDatabase() {
         'Languages' : document.getElementById('languages').value,
         'Gender' : document.getElementById('gender').value,
         'Religion' : document.getElementById('religion').value,
-        'Hobbies' : document.getElementById('hobbies').value,
+        'Hobbies' : hobbies,
         'Relationship Status' : document.getElementById('relationship').value,
         'Sexual Orientation' : document.getElementById('sexualOrientation').value,
         'dateApplied' : timeStamp,
@@ -77,7 +77,7 @@ function sendApplicationToDatabase() {
         }
     }
 
-    if(updateDict.location == "") {
+    if(updateDict.City == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please list your city"
 
@@ -101,11 +101,7 @@ function sendApplicationToDatabase() {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please select your gender"
 
-    } else if(updateDict.hobbies == "") {
-        errorMessage.style.display = "block"
-        errorMessage.innerHTML = "Please list some of your hobbies"
-
-    } else if(updateDict.relationship == "") {
+    }  else if(updateDict.relationship == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please select your relationship status"
 
@@ -359,4 +355,56 @@ function createDOMElement(type, classStr, text, parentElement) {
     }
   
     return(DOMElement)
+}
+
+
+
+
+//Hobbies Dropdown
+let hobbiesDropdown = document.getElementById('hobbies-dropdown')
+let hobbiesContainer = document.getElementById('hobbies-container')
+
+hobbiesDropdown.addEventListener('click', () => {
+    hobbiesContainer.style.display = 'block'
+    
+})
+
+
+let hobbies = [];
+
+let availableHobbies = ["Reading", "Blogging", "Dancing", "Singing", "Music", "Playing an Instrument", "Learning new languages", "Shopping", "Traveling", "Hiking", "Cycling", "Exercising", "Drawing", "Painting", "Collecting Things", "Gaming", "Cooking", "Baking", "Gardening", "Crafts", "Embroidering", "Sewing", "Knitting", "Board Games", "Walking", "Writing", "Fishing", "Photography", "Skydiving", "Skating", "Skiing", "Roller skating", "Longboarding", "Surfing"];
+
+function selectHobby() {
+    let hobby = this.innerText;
+
+    if (availableHobbies.includes(hobby)) {
+        if (hobbies.includes(hobby)) {
+            // Hobby already selected, remove it
+            this.style.backgroundColor = "";
+            this.style.color = "";
+
+            // Remove the hobby from the array
+            hobbies = hobbies.filter(h => h !== hobby);
+
+            console.log(hobby + " was removed from hobbies");
+        } else {
+            // Hobby not selected, add it
+            this.style.backgroundColor = "black";
+            this.style.color = "white";
+
+            hobbies.push(hobby);
+
+            console.log(hobby + " was added to hobbies");
+        }
+    } else {
+        console.log("This hobby is not in the available hobbies list.");
+    }
+}
+
+window.onload = function() {
+    let hobbiesItems = document.getElementsByClassName("hobbiesitem");
+
+    for (let i = 0; i < hobbiesItems.length; i++) {
+        hobbiesItems[i].addEventListener("click", selectHobby);
+    }
 }
