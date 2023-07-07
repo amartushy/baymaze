@@ -1,4 +1,27 @@
+//Global Variables__________________________________________________________________
+var applicationID = createID(10)
+var currentUserID = ""
+var videoURL = ""
 
+var city = ""
+var state = ""
+
+
+let applicationForm = document.getElementById("application-form")
+let successScreen = document.getElementById("success-screen")
+let errorMessage = document.getElementById("error-message")
+
+document.getElementById("submitApplication").addEventListener("click", sendApplicationToDatabase)
+
+window.onload = function() {
+    let hobbiesItems = document.getElementsByClassName("hobbiesitem");
+
+    for (let i = 0; i < hobbiesItems.length; i++) {
+        hobbiesItems[i].addEventListener("click", selectHobby);
+    }
+
+    loadUserAccountInitialState()
+};
 
 
 function loadUserAccountInitialState() {
@@ -7,7 +30,7 @@ function loadUserAccountInitialState() {
         if (user) {
             // User is signed in
             currentUserID = user.uid;
-            console.log(currentUserID)
+            console.log("test", currentUserID)
             database.collection('users').doc(currentUserID).get().then( (doc) => {
                 var data = doc.data()
 
