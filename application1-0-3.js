@@ -110,17 +110,12 @@ function sendApplicationToDatabase() {
         errorMessage.innerHTML = "Please upload a video"
 
     } else {
-        database.collection('applications').doc(`${applicationID}`).set(updateDict)
-        .then(() => {
+
+        database.collection('users').doc(`${currentUserID}`).set(updateDict, {merge : true}).then(() => {
             applicationForm.style.display = "none"
             successScreen.style.display = "flex"
     
             sendEmailData(updateDict)
-    
-            database.collection('users').doc(`${currentUserID}`).set(updateDict, {merge : true})
-            .catch((error) => {
-                console.error("Error writing document: ", error);
-            });
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
