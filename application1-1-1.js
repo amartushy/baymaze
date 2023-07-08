@@ -20,9 +20,14 @@ document.getElementById("submitApplication").addEventListener("click", sendAppli
 
 window.onload = function() {
     let hobbiesItems = document.getElementsByClassName("hobbiesitem");
+    let languageItems = document.getElementsByClassName("languagesitem");
 
     for (let i = 0; i < hobbiesItems.length; i++) {
         hobbiesItems[i].addEventListener("click", selectHobby);
+    }
+
+    for (let i = 0; i < languageItems.length; i++) {
+        languageItems[i].addEventListener("click", selectLanguage);
     }
 
     loadUserAccountInitialState()
@@ -414,5 +419,49 @@ function selectHobby() {
         }
     } else {
         console.log("This hobby is not in the available hobbies list.");
+    }
+}
+
+
+
+
+//Hobbies Dropdown
+let languageDropdown = document.getElementById('language-dropdown')
+let languageContainer = document.getElementById('language-container')
+
+languageDropdown.addEventListener('click', () => {
+    languageContainer.style.display = 'block'
+    
+})
+
+let languages = [];
+let availableLanguages = ["English", "Spanish", "Chinese", "Tagalog", "Vietnamese", "French", "Arabic", "Korean", "Russian", "German"]
+
+
+function selectLanguage() {
+
+    let language = this.innerText;
+
+    if (availableLanguages.includes(language)) {
+        if (languages.includes(language)) {
+            // Language already selected, remove it
+            this.style.backgroundColor = "";
+            this.style.color = "";
+
+            // Remove the Language from the array
+            languages = languages.filter(h => h !== language);
+
+            console.log(language + " was removed from languages");
+        } else {
+            // Language not selected, add it
+            this.style.backgroundColor = "black";
+            this.style.color = "white";
+
+            languages.push(language);
+
+            console.log(language + " was added to languages");
+        }
+    } else {
+        console.log("This language is not in the available the list.");
     }
 }
