@@ -86,7 +86,9 @@ function sendApplicationToDatabase() {
             'Thursday' : 0,
             'Friday' : 0,
             'Saturday' : 0
-        }
+        },
+        'Work Environment' : document.getElementById('workEnvironment').value
+
     }
 
     if(updateDict.City == "") {
@@ -95,7 +97,7 @@ function sendApplicationToDatabase() {
 
     } else if(city.Duration == "") {
         errorMessage.style.display = "block"
-        errorMessage.innerHTML = "Please enter how long'e you've lived in this city"
+        errorMessage.innerHTML = "Please enter how long you've lived in this city"
         
     } else if(updateDict.goodFit == "") {
         errorMessage.style.display = "block"
