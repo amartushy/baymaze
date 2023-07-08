@@ -11,6 +11,11 @@ let applicationForm = document.getElementById("application-form")
 let successScreen = document.getElementById("success-screen")
 let errorMessage = document.getElementById("error-message")
 
+
+let cityDurationText = document.getElementById("city-duration-text")
+
+
+
 document.getElementById("submitApplication").addEventListener("click", sendApplicationToDatabase)
 
 window.onload = function() {
@@ -60,6 +65,7 @@ function sendApplicationToDatabase() {
         'City' : city,
         'State' : state,
         'Bio' : document.getElementById('goodFit').value,
+        'Duration' : document.getElementById('duration').value,
         'Profession' : document.getElementById('profession').value,
         'Age' : document.getElementById('age').value,
         'Languages' : document.getElementById('languages').value,
@@ -87,6 +93,10 @@ function sendApplicationToDatabase() {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please list your city"
 
+    } else if(city.Duration == "") {
+        errorMessage.style.display = "block"
+        errorMessage.innerHTML = "Please enter how long'e you've lived in this city"
+        
     } else if(updateDict.goodFit == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please enter a bio"
@@ -286,6 +296,8 @@ function addCityForUser(cityString, stateString) {
 
     cityStateText.style.display = 'block'
     cityStateText.innerHTML = `${city}, ${state}`
+
+    cityDurationText.style.display = 'block'
 }
 
 // Create the render function
