@@ -74,7 +74,7 @@ function sendApplicationToDatabase() {
         'Duration' : document.getElementById('city-duration-field').value,
         'Profession' : document.getElementById('profession').value,
         'Age' : document.getElementById('age').value,
-        'Languages' : document.getElementById('languages').value,
+        'Languages' : languages,
         'Gender' : document.getElementById('gender').value,
         'Religion' : document.getElementById('religion').value,
         'Hobbies' : hobbies,
