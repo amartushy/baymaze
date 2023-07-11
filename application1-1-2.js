@@ -2,6 +2,7 @@
 var applicationID = createID(10)
 var currentUserID = ""
 var videoURL = ""
+var profilePhoto = ""
 
 var city = ""
 var state = ""
@@ -80,6 +81,7 @@ function sendApplicationToDatabase() {
         'Relationship Status' : document.getElementById('relationship').value,
         'Sexual Orientation' : document.getElementById('sexualOrientation').value,
         'dateApplied' : timeStamp,
+        'profilePhoto' : profilePhoto,
         'profileVideo' : videoURL,
         'applicationStatus' : 'pending',
         'pricePPH' : 10.0,
@@ -96,7 +98,11 @@ function sendApplicationToDatabase() {
 
     }
 
-    if(updateDict.City == "") {
+    if(updateDict.profilePhoto == "") {
+        errorMessage.style.display = "block"
+        errorMessage.innerHTML = "Please upload a profile photo"
+
+    } else if(updateDict.City == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please list your city"
 
@@ -464,4 +470,56 @@ function selectLanguage() {
     } else {
         console.log("This language is not in the available the list.");
     }
+}
+
+
+
+
+
+
+//PROFILE IMAGE CONTAINER______________________________________________________________________________________________
+
+var imageContainer = document.getElementById('image-container')
+var hiddenProfileImageUploadButton = document.getElementById('hidden-photo-upload-button')
+var imageUploadButton = document.getElementById('atc-main-product-image')
+
+
+imageUploadButton.addEventListener('click', () => {
+    hiddenProfileImageUploadButton.click();
+})
+
+
+hiddenProfileImageUploadButton.addEventListener('change', uploadProfileImage);
+
+var selectedFile;
+function uploadProfileImage(e) {
+    selectedFile = e.target.files[0];
+    handleImageUpload()
+}
+
+async function handleImageUpload() {
+	const uploadTask = await storageRef.child(`profileImages/${currentUserID}`).put(selectedFile);
+	uploadAndCreateImage()
+}
+
+//final submit button and update firebase
+async function uploadAndCreateImage() {
+	await storageRef.child('/profileImages/'+currentUserID)
+		.getDownloadURL()
+		.then(function(url) { profilePhoto = url.toString() })
+
+        print(profilePhoto)
+
+    //Create Image
+    while(imageContainer.firstChild) {
+        imageContainer.removeChild(imageContainer.firstChild)
+    }
+    var newImage = document.createElement('img')
+    newImage.setAttribute('class', 'atc-main-product-image')
+    newImage.src = profilePhoto
+    imageContainer.appendChild(newImage)
+    newImage.addEventListener('click', () => {
+        console.log('clicked')
+        hiddenProfileImageUploadButton.click();
+    })
 }
