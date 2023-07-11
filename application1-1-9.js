@@ -1,16 +1,4 @@
-//Global Variables__________________________________________________________________
-var applicationID = createID(10)
-var currentUserID = ""
-var videoURL = ""
-var profilePhoto = ""
-
-var city = ""
-var state = ""
-
-
-let applicationForm = document.getElementById("application-form")
-let successScreen = document.getElementById("success-screen")
-let errorMessage = document.getElementById("error-message")
+ge = document.getElementById("error-message")
 
 let cityDurationBlock = document.getElementById("city-duration-block")
 let cityDurationText = document.getElementById("city-duration-text")
@@ -72,12 +60,13 @@ function sendApplicationToDatabase() {
         'State' : state,
         'Bio' : document.getElementById('goodFit').value,
         'Duration' : document.getElementById('city-duration-field').value,
-        'Profession' : document.getElementById('profession').value,
         'Age' : document.getElementById('age').value,
         'Languages' : languages,
         'Gender' : document.getElementById('gender').value,
         'Religion' : document.getElementById('religion').value,
         'Hobbies' : hobbies,
+        'Politics' : document.getElementById('politics').value,
+        'Profession' : document.getElementById('profession').value,
         'Relationship Status' : document.getElementById('relationship').value,
         'Sexual Orientation' : document.getElementById('sexualOrientation').value,
         'dateApplied' : timeStamp,
@@ -106,7 +95,7 @@ function sendApplicationToDatabase() {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please list your city"
 
-    } else if(city.Duration == "") {
+    } else if(updateDict.Duration == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please enter how long you've lived in this city"
         
