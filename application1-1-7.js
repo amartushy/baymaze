@@ -390,6 +390,7 @@ function createDOMElement(type, classStr, text, parentElement) {
 //Hobbies Dropdown
 let hobbiesDropdown = document.getElementById('hobbies-dropdown')
 let hobbiesContainer = document.getElementById('hobbies-container')
+hobbiesContainer.style.display = 'none'
 
 hobbiesDropdown.addEventListener('click', () => {
     hobbiesContainer.style.display = 'block'
