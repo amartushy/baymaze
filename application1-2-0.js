@@ -1,4 +1,16 @@
-ge = document.getElementById("error-message")
+//Global Variables__________________________________________________________________
+var applicationID = createID(10)
+var currentUserID = ""
+var videoURL = ""
+var profilePhoto = ""
+
+var city = ""
+var state = ""
+
+
+let applicationForm = document.getElementById("application-form")
+let successScreen = document.getElementById("success-screen")
+let errorMessage = document.getElementById("error-message")
 
 let cityDurationBlock = document.getElementById("city-duration-block")
 let cityDurationText = document.getElementById("city-duration-text")
@@ -133,7 +145,7 @@ function sendApplicationToDatabase() {
             applicationForm.style.display = "none"
             successScreen.style.display = "flex"
     
-            sendEmailData(updateDict)
+            // sendEmailData(updateDict)
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
