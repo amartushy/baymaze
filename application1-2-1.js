@@ -145,7 +145,7 @@ function sendApplicationToDatabase() {
             applicationForm.style.display = "none"
             successScreen.style.display = "flex"
     
-            // sendEmailData(updateDict)
+            sendEmailData(updateDict)
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
