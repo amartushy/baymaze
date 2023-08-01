@@ -146,7 +146,25 @@ function sendApplicationToDatabase() {
             applicationForm.style.display = "none"
             successScreen.style.display = "flex"
     
-            sendEmailData(updateDict)
+            let emailDict = {
+                'City' : city,
+                'State' : state,
+                'Bio' : document.getElementById('goodFit').value,
+                'Duration' : document.getElementById('city-duration-years').value,
+                'DurationMonths' : document.getElementById('city-duration-months').value,
+                'Age' : document.getElementById('age').value,
+                'Gender' : document.getElementById('gender').value,
+                'Religion' : document.getElementById('religion').value,
+                'Politics' : document.getElementById('politics').value,
+                'Profession' : document.getElementById('profession').value,
+                'Relationship Status' : document.getElementById('relationship').value,
+                'Sexual Orientation' : document.getElementById('sexualOrientation').value,
+                'dateApplied' : timeStamp,
+                'profilePhoto' : profilePhoto,
+                'profileVideo' : videoURL,
+                'Work Environment' : document.getElementById('workEnvironment').value
+            }
+            sendEmailData(emailDict)
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
