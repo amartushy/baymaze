@@ -23,7 +23,7 @@ optionalDropdown.addEventListener('click', () => {
     if (optionalDropdownItems.style.display == "none") {
         $('#optional-dropdown-items').fadeIn(400, () => {
             optionalDropdownItems.style.display == "block"
-        }
+        })
         
     } else {
         $('#optional-dropdown-items').fadeOut(400, () => {
