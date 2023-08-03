@@ -20,7 +20,17 @@ let optionalDropdown = document.getElementById("optional-dropdown")
 let optionalDropdownItems = document.getElementById("optional-dropdown-items")
 
 optionalDropdown.addEventListener('click', () => {
-    $('#optional-dropdown-items').fadeIn()
+    if (optionalDropdownItems.style.display == "none") {
+        $('#optional-dropdown-items').fadeIn(400, () => {
+            optionalDropdownItems.style.display == "block"
+        }
+        
+    } else {
+        $('#optional-dropdown-items').fadeOut(400, () => {
+            optionalDropdownItems.style.display == "none"
+
+        })
+    }
 })
 
 document.getElementById("submitApplication").addEventListener("click", sendApplicationToDatabase)
