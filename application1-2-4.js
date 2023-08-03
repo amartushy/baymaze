@@ -16,6 +16,12 @@ let cityDurationBlock = document.getElementById("city-duration-block")
 let cityDurationText = document.getElementById("city-duration-text")
 let cityDurationField = document.getElementById("city-duration-field")
 
+let optionalDropdown = document.getElementById("optional-dropdown")
+let optionalDropdownItems = document.getElementById("optional-dropdown-items")
+
+optionalDropdown.addEventListener('click', () => {
+    $('#optional-dropdown-items').fadeIn()
+})
 
 document.getElementById("submitApplication").addEventListener("click", sendApplicationToDatabase)
 
@@ -100,11 +106,7 @@ function sendApplicationToDatabase() {
 
     }
 
-    if(updateDict.profilePhoto == "") {
-        errorMessage.style.display = "block"
-        errorMessage.innerHTML = "Please upload a profile photo"
-
-    } else if(updateDict.City == "") {
+    if(updateDict.City == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please list your city"
 
@@ -116,29 +118,9 @@ function sendApplicationToDatabase() {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please enter a bio"
         
-    } else if(updateDict.profession == "") {
-        errorMessage.style.display = "block"
-        errorMessage.innerHTML = "Please select your profession"
-
     } else if(updateDict.age == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please enter your age"
-
-    } else if(updateDict.languages == ""){
-        errorMessage.style.display = "block"
-        errorMessage.innerHTML = "Please list the languages you speak"
-
-    } else if(updateDict.gender == "") {
-        errorMessage.style.display = "block"
-        errorMessage.innerHTML = "Please select your gender"
-
-    }  else if(updateDict.relationship == "") {
-        errorMessage.style.display = "block"
-        errorMessage.innerHTML = "Please select your relationship status"
-
-    } else if(videoURL == "") {
-        errorMessage.style.display = "block"
-        errorMessage.innerHTML = "Please upload a video"
 
     } else {
 
