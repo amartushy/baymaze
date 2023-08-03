@@ -20,6 +20,7 @@ let optionalDropdown = document.getElementById("optional-dropdown")
 let optionalDropdownItems = document.getElementById("optional-dropdown-items")
 optionalDropdownItems.style.display = "none"
 
+
 optionalDropdown.addEventListener('click', () => {
     if (optionalDropdownItems.style.display == "none") {
         $('#optional-dropdown-items').fadeIn(400, () => {
@@ -125,11 +126,11 @@ function sendApplicationToDatabase() {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please enter how long you've lived in this city"
         
-    } else if(updateDict.goodFit == "") {
+    } else if(updateDict.Bio == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please enter a bio"
         
-    } else if(updateDict.age == "") {
+    } else if(updateDict.Age == "") {
         errorMessage.style.display = "block"
         errorMessage.innerHTML = "Please enter your age"
 
