@@ -18,6 +18,7 @@ let cityDurationField = document.getElementById("city-duration-field")
 
 let optionalDropdown = document.getElementById("optional-dropdown")
 let optionalDropdownItems = document.getElementById("optional-dropdown-items")
+optionalDropdownItems.style.display = "none"
 
 optionalDropdown.addEventListener('click', () => {
     if (optionalDropdownItems.style.display == "none") {
