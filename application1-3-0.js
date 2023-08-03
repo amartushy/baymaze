@@ -135,34 +135,33 @@ function sendApplicationToDatabase() {
         errorMessage.innerHTML = "Please enter your age"
 
     } else {
-        console.log("all good")
-//        database.collection('users').doc(`${currentUserID}`).set(updateDict, {merge : true}).then(() => {
-//            applicationForm.style.display = "none"
-//            successScreen.style.display = "flex"
-//
-//            let emailDict = {
-//                'City' : city,
-//                'State' : state,
-//                'Bio' : document.getElementById('goodFit').value,
-//                'Duration' : document.getElementById('city-duration-years').value,
-//                'DurationMonths' : document.getElementById('city-duration-months').value,
-//                'Age' : document.getElementById('age').value,
-//                'Gender' : document.getElementById('gender').value,
-//                'Religion' : document.getElementById('religion').value,
-//                'Politics' : document.getElementById('politics').value,
-//                'Profession' : document.getElementById('profession').value,
-//                'Relationship Status' : document.getElementById('relationship').value,
-//                'Sexual Orientation' : document.getElementById('sexualOrientation').value,
-//                'dateApplied' : timeStamp,
-//                'profilePhoto' : profilePhoto,
-//                'profileVideo' : videoURL,
-//                'Work Environment' : document.getElementById('workEnvironment').value
-//            }
-//            sendEmailData(emailDict)
-//        })
-//        .catch((error) => {
-//            console.error("Error writing document: ", error);
-//        });
+        database.collection('users').doc(`${currentUserID}`).set(updateDict, {merge : true}).then(() => {
+            applicationForm.style.display = "none"
+            successScreen.style.display = "flex"
+
+            let emailDict = {
+                'City' : city,
+                'State' : state,
+                'Bio' : document.getElementById('goodFit').value,
+                'Duration' : document.getElementById('city-duration-years').value,
+                'DurationMonths' : document.getElementById('city-duration-months').value,
+                'Age' : document.getElementById('age').value,
+                'Gender' : document.getElementById('gender').value,
+                'Religion' : document.getElementById('religion').value,
+                'Politics' : document.getElementById('politics').value,
+                'Profession' : document.getElementById('profession').value,
+                'Relationship Status' : document.getElementById('relationship').value,
+                'Sexual Orientation' : document.getElementById('sexualOrientation').value,
+                'dateApplied' : timeStamp,
+                'profilePhoto' : profilePhoto,
+                'profileVideo' : videoURL,
+                'Work Environment' : document.getElementById('workEnvironment').value
+            }
+            sendEmailData(emailDict)
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
     }
 
     console.log(updateDict)
